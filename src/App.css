@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+}
+
+.App-header {
+  margin-bottom: 2rem;
+}
+
+.App-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.App-content {
+  max-width: 32rem;
+  padding: 1rem;
+}
+
+.App-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s ease;
+}
+
+.App-button:hover {
+  background-color: #2563eb;
+}
+.translate-box {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  padding: 6px 10px;
+  box-shadow: 0 0 8px rgba(0, 152, 163, 0.3);
+  font-size: 14px;
+}
+
+.goog-te-gadget {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 13px !important;
+  color: #fff !important;
+}
+
+.goog-te-combo {
+  background-color: #ffffff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}

@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --hitech-black: #000000;
+  --hitech-orange: #f9943b;
+  --hitech-teal: #0098a3;
+  --hitech-offwhite: #f0f0f0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* 🟧 Custom Theme Classes */
+.bg-hitech-black {
+  background-color: var(--hitech-black);
+}
+
+.text-hitech-black {
+  color: var(--hitech-black);
+}
+
+.bg-hitech-orange {
+  background-color: var(--hitech-orange);
+}
+
+.text-hitech-orange {
+  color: var(--hitech-orange);
+}
+
+.bg-hitech-teal {
+  background-color: var(--hitech-teal);
+}
+
+.text-hitech-teal {
+  color: var(--hitech-teal);
+}
+
+.text-hitech-offwhite {
+  color: var(--hitech-offwhite);
+}
+
+.bg-hitech-offwhite {
+  background-color: var(--hitech-offwhite);
+}
