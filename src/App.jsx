@@ -7,6 +7,9 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import ProductsPage from "./pages/ProductsPage";
 import DocumentsPage from "./pages/DocumentsPage";
+import IRRDProductPage from "./pages/IRRDProductPage";
+import ProjectGalleryPage from "./pages/project_gallery";
+import ADTCProductPage from "./pages/ADTCProductPage";
 import './app.css';
 
 export default function App() {
@@ -20,8 +23,10 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/products" element={<ProductsPage />} />
-          <Route path="/documents" element={<DocumentsPage/>} />
-          
+          <Route path="/documents" element={<DocumentsPage />} />
+          <Route path="/IRRDProductPage" element={<IRRDProductPage />} />
+          <Route path="/ADTCProductPage" element={<ADTCProductPage/>} />
+          <Route path="/project_gallery_page" element={<ProjectGalleryPage />} />
         </Routes>
       </main>
       <Footer />

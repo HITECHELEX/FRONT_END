@@ -5,8 +5,6 @@ import {
   Nav,
   NavDropdown,
   Offcanvas,
-  Button,
-  Form,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,7 +15,6 @@ import {
   FaYoutube,
   FaPhone,
   FaEnvelope,
-  FaSearch,
 } from "react-icons/fa";
 
 export default function AppNavbar() {
@@ -27,34 +24,52 @@ export default function AppNavbar() {
 
   return (
     <>
-      {/* Top Bar */}
+      {/* Top Bar - Improved with gradient and better spacing */}
       <div
-        className="bg-dark text-white py-3 px-3 d-flex justify-content-between align-items-center"
-        style={{ fontSize: "14px" }}
+        className="bg-dark text-white py-2 px-3 d-flex flex-wrap justify-content-between align-items-center"
+        style={{
+          fontSize: "14px",
+          background: "linear-gradient(90deg, #1a1a1a 0%, #2d2d2d 100%)",
+          borderBottom: "1px solid rgba(255,255,255,0.1)"
+        }}
       >
         <div className="me-3 d-flex align-items-center">
-          <FaPhone className="me-2" />
-          Call us: +91 8766730569
+          <FaPhone className="me-2" style={{ color: "#f9943b" }} />
+          <span className="d-none d-sm-inline" style={{ opacity: 0.8 }}>Call us: </span>
+          <span style={{ fontWeight: 500 }}>+91 8766730569</span>
         </div>
         <div className="d-flex align-items-center">
-          <FaEnvelope className="me-2" />
-          Email: sales@hitechelex.com
+          <FaEnvelope className="me-2" style={{ color: "#f9943b" }} />
+          <span className="d-none d-sm-inline" style={{ opacity: 0.8 }}>Email: </span>
+          <span style={{ fontWeight: 500 }}>sales@hitechelex.com</span>
         </div>
-        <div className="d-flex gap-3">
-          <a href="#" className="text-white">
-            <FaFacebookF />
-          </a>
-          <a href="#" className="text-white">
-            <FaTwitter />
-          </a>
-          <a href="#" className="text-white">
-            <FaLinkedinIn />
-          </a>
-          <a href="#" className="text-white">
-            <FaYoutube />
-          </a>
+        <div className="d-flex gap-3 mt-2 mt-sm-0">
+          {[
+            { icon: <FaFacebookF />, color: "#4267B2" },
+            { icon: <FaTwitter />, color: "#1DA1F2" },
+            { icon: <FaLinkedinIn />, color: "#0077B5" },
+            { icon: <FaYoutube />, color: "#FF0000" },
+          ].map((social, index) => (
+            <a 
+              href="#" 
+              key={index}
+              className="text-white d-flex align-items-center justify-content-center"
+              style={{
+                width: "28px",
+                height: "28px",
+                borderRadius: "50%",
+                backgroundColor: social.color,
+                transition: "transform 0.2s",
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.1)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+            >
+              {social.icon}
+            </a>
+          ))}
         </div>
       </div>
+
 
       {/* Main Navbar */}
       <Navbar
@@ -62,12 +77,11 @@ export default function AppNavbar() {
         sticky="top"
         className="shadow-sm"
         style={{
-          backgroundColor: "rgba(245, 245, 245, 0.89)",
-          backdropFilter: "blur(15px) saturate(180%)",
-          WebkitBackdropFilter: "blur(10px) saturate(180%)",
-          borderBottom: "8px solid #f9943b",
-          boxShadow: "0 4px 20px 4px rgba(0, 245, 255, 0.6)",
-          transition: "box-shadow 0.3s ease-in-out",
+          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: "5px solid #f9943b",
+          boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
           zIndex: "999",
         }}
       >
@@ -76,21 +90,27 @@ export default function AppNavbar() {
             <img
               src="/img/logo.png"
               alt="Logo"
-              width="60"
-              height="60"
-              className="me-3"
+              width="50"
+              height="50"
+              className="me-2"
+              style={{ objectFit: "contain" }}
             />
             <div className="d-flex flex-column">
               <span
                 style={{
-                  fontSize: "20px",
+                  fontSize: "18px",
                   fontWeight: "bold",
-                  lineHeight: "1.4",
+                  color: "#222",
                 }}
               >
                 HI-TECH ELEX LLP
               </span>
-              <span style={{ fontSize: "12px", color: "#873" }}>
+              <span
+                style={{
+                  fontSize: "12px",
+                  color: "#777",
+                }}
+              >
                 Creating Smart Electrical Systems
               </span>
             </div>
@@ -107,13 +127,12 @@ export default function AppNavbar() {
               <Offcanvas.Title>Menu</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className="ms-auto" style={{ color: "#0098a3" }}>
+              <Nav className="ms-auto text-uppercase fw-semibold">
                 <Nav.Link as={Link} to="/" onClick={handleClose}>
-                  HOME
+                  Home
                 </Nav.Link>
 
-                {/* PROJECTS Dropdown */}
-                <NavDropdown title="PROJECTS" id="projects-dropdown">
+                <NavDropdown title="Projects" id="projects-dropdown">
                   <NavDropdown.Item as={Link} to="/turnkey" onClick={handleClose}>
                     Turnkey Projects
                   </NavDropdown.Item>
@@ -122,39 +141,20 @@ export default function AppNavbar() {
                   </NavDropdown.Item>
                 </NavDropdown>
 
-                
-
-                
                 <Nav.Link as={Link} to="/products" onClick={handleClose}>
-                  PRODUCTS
+                  Products
                 </Nav.Link>
 
-                <Nav.Link as={Link} to="/Documents" onClick={handleClose}>
-                  DOCUMENTS
+                <Nav.Link as={Link} to="/documents" onClick={handleClose}>
+                  Documents
                 </Nav.Link>
                 <Nav.Link as={Link} to="/about" onClick={handleClose}>
-                  ABOUT US
+                  About Us
                 </Nav.Link>
                 <Nav.Link as={Link} to="/contact" onClick={handleClose}>
-                  CONTACT US
+                  Contact Us
                 </Nav.Link>
               </Nav>
-
-              {/* Search Form */}
-              <Form
-                className="d-flex ms-2 mt-3 mt-lg-0"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <Form.Control
-                  type="search"
-                  placeholder="Search..."
-                  className="me-2"
-                  style={{ maxWidth: "100px", fontSize: "16px" }}
-                />
-                <Button variant="outline-dark" type="submit">
-                  <FaSearch />
-                </Button>
-              </Form>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>

@@ -1,0 +1,99 @@
+/* ADTCProductPage.css */
+
+/* Base Styles */
+:root {
+  --hitech-black: #1a1a1a;
+  --hitech-offwhite: #f5f5f5;
+  --hitech-teal: #38b6ac;
+  --hitech-orange: #f8943a;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Ensure Tailwind utilities work with custom styles */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.bg-hitech-black {
+  background-color: var(--hitech-black);
+}
+
+.text-hitech-offwhite {
+  color: var(--hitech-offwhite);
+}
+
+.bg-hitech-teal {
+  background-color: var(--hitech-teal);
+}
+
+.text-hitech-teal {
+  color: var(--hitech-teal);
+}
+
+.bg-hitech-orange {
+  background-color: var(--hitech-orange);
+}
+
+.text-hitech-orange {
+  color: var(--hitech-orange);
+}
+
+.border-hitech-teal {
+  border-color: var(--hitech-teal);
+}
+
+/* Button Styles */
+button, a {
+  transition: all 0.3s ease;
+}
+
+/* Hero Section */
+section {
+  position: relative;
+}
+
+.bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--hitech-black), var(--hitech-teal));
+}
+
+.bg-[radial-gradient(circle_at_center,rgba(56,182,172,0.1),transparent)] {
+  background: radial-gradient(circle at center, rgba(56, 182, 172, 0.1), transparent);
+}
+
+/* Grid and Dot Patterns */
+.bg-[url('/img/grid-pattern.svg')] {
+  background-image: url('/img/grid-pattern.svg');
+}
+
+.bg-[url('/img/dot-pattern.svg')] {
+  background-image: url('/img/dot-pattern.svg');
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .lg\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .lg\:order-1 {
+    order: 2;
+  }
+
+  .lg\:order-2 {
+    order: 1;
+  }
+
+  .flex-wrap {
+    flex-direction: column;
+  }
+
+  .gap-4 {
+    gap: 1rem;
+  }
+}

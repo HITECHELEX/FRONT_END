@@ -57,3 +57,13 @@ body {
 .bg-hitech-offwhite {
   background-color: var(--hitech-offwhite);
 }
+
+/* ✅ Responsive container spacing */
+.container {
+  width: 100%;
+  max-width: 1280px; /* optional: set max width like Tailwind's default */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}

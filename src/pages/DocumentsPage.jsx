@@ -1,211 +1,166 @@
-import React, { useState, useCallback } from 'react';
-import { FaFileDownload, FaExclamationTriangle } from 'react-icons/fa';
-import Footer from '../components/Footer'; // Update path as per your project
 
-const PdfSection = () => {
-  const [isLoadingCert, setIsLoadingCert] = useState(true);
-  const [hasErrorCert, setHasErrorCert] = useState(false);
-  const [isLoadingBrochure, setIsLoadingBrochure] = useState(true);
-  const [hasErrorBrochure, setHasErrorBrochure] = useState(false);
-  const [isLoadingTechSpecs, setIsLoadingTechSpecs] = useState(true);
-  const [hasErrorTechSpecs, setHasErrorTechSpecs] = useState(false);
-  const [isLoadingManual, setIsLoadingManual] = useState(true);
-  const [hasErrorManual, setHasErrorManual] = useState(false);
 
-  const debounce = (func, wait) => {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(null, args), wait);
-    };
+
+
+
+
+
+
+
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { FaShieldAlt, FaCogs, FaPlug, FaChartLine } from 'react-icons/fa';
+
+// Category data with images and icons
+const categories = [
+  {
+    id: 1,
+    name: 'Protective Relays',
+    slug: 'relays',
+    description: 'Siemens SIPROTEC relays for advanced differential and overcurrent protection.',
+    icon: <FaShieldAlt />,
+    image: 'https://images.unsplash.com/photo-1581092160607-36e2d26a5b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
+  },
+  {
+    id: 2,
+    name: 'Switchgear',
+    slug: 'switchgear',
+    description: 'MV/HV/EHV breakers and spare parts for robust power distribution.',
+    icon: <FaCogs />,
+    image: 'https://images.unsplash.com/photo-1581092162385-454a4e3c3e94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
+  },
+  {
+    id: 3,
+    name: 'Panels',
+    slug: 'panels',
+    description: 'Modular MCB and control panels for industrial applications.',
+    icon: <FaPlug />,
+    image: 'https://images.unsplash.com/photo-1581092160607-36e2d26a5b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
+  },
+  {
+    id: 4,
+    name: 'Power System Solutions',
+    slug: 'solutions',
+    description: 'ETAP-based power system studies and automation solutions.',
+    icon: <FaChartLine />,
+    image: 'https://images.unsplash.com/photo-1581092162385-454a4e3c3e94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
+  },
+];
+
+const CategoryPage = () => {
+  // Animation variants for container
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: 'easeOut',
+        when: 'beforeChildren',
+        staggerChildren: 0.2,
+      },
+    },
   };
 
-  const handleDownloadCert = useCallback(
-    debounce(() => {
-      window.open('https://drive.google.com/uc?export=download&id=1L45-tx2LUGnsoHAogzCzOdsAS2Gp9XfG', '_blank', 'noopener,noreferrer');
-    }, 500),
-    []
-  );
-
-  const handleDownloadBrochure = useCallback(
-    debounce(() => {
-      window.open('https://drive.google.com/uc?export=download&id=1fLgw-3noBPK-J7iPsnSxhLRR8GRvUCO0', '_blank', 'noopener,noreferrer');
-    }, 500),
-    []
-  );
-
-  const handleDownloadTechSpecs = useCallback(
-    debounce(() => {
-      window.open('https://drive.google.com/uc?export=download&id=1IeM0dUr5juQBBJvQ8xIRW9Uy6vcA3og_', '_blank', 'noopener,noreferrer');
-    }, 500),
-    []
-  );
-
-  const handleDownloadManual = useCallback(
-    debounce(() => {
-      window.open('https://drive.google.com/uc?export=download&id=1e5nAQAJq8hRMdREET9xtQ7KAtONvdw_n', '_blank', 'noopener,noreferrer');
-    }, 500),
-    []
-  );
-
-  const handleIframeLoadCert = () => setIsLoadingCert(false);
-  const handleIframeErrorCert = () => {
-    setIsLoadingCert(false);
-    setHasErrorCert(true);
+  // Animation variants for child elements
+  const childVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    },
   };
 
-  const handleIframeLoadBrochure = () => setIsLoadingBrochure(false);
-  const handleIframeErrorBrochure = () => {
-    setIsLoadingBrochure(false);
-    setHasErrorBrochure(true);
-  };
-
-  const handleIframeLoadTechSpecs = () => setIsLoadingTechSpecs(false);
-  const handleIframeErrorTechSpecs = () => {
-    setIsLoadingTechSpecs(false);
-    setHasErrorTechSpecs(true);
-  };
-
-  const handleIframeLoadManual = () => setIsLoadingManual(false);
-  const handleIframeErrorManual = () => {
-    setIsLoadingManual(false);
-    setHasErrorManual(true);
+  // Animation variants for images with subtle zoom
+  const imageVariants = {
+    initial: { scale: 1, opacity: 0.7 },
+    visible: {
+      scale: 1.1,
+      opacity: 1,
+      transition: {
+        duration: 6,
+        ease: 'easeOut',
+        repeat: Infinity,
+        repeatType: 'reverse',
+      },
+    },
   };
 
   return (
-    <div className="min-h-[80vh] bg-gray-100 flex flex-col">
-      <style>
-        {`
-          :root {
-            --primary: #0098a3;
-            --primary-light: #e6f7f8;
-            --primary-dark: #007780;
-            --accent: rgb(255, 92, 0);
-            --accent-light: rgba(255, 92, 0, 0.1);
-            --accent-dark: rgb(204, 74, 0);
-            --white: #ffffff;
-            --gray-50: #f8fafc;
-            --gray-100: #f1f5f9;
-            --gray-200: #e2e8f0;
-            --gray-300: #cbd5e0;
-            --gray-400: #94a3b8;
-            --gray-500: #64748b;
-            --gray-600: #475569;
-            --gray-700: #334155;
-            --gray-800: #1e293b;
-            --gray-900: #0f172a;
-            --font-base: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
-            --text-sm: 0.875rem;
-            --text-base: 1rem;
-            --text-lg: 1.125rem;
-            --text-xl: 1.25rem;
-            --text-2xl: 1.5rem;
-            --text-3xl: 1.875rem;
-            --text-4xl: 2.25rem;
-            --space-2: 0.5rem;
-            --space-3: 0.75rem;
-            --space-4: 1rem;
-            --space-5: 1.25rem;
-            --space-6: 1.5rem;
-            --radius-sm: 4px;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --radius-full: 9999px;
-            --border-width: 1px;
-            --shadow-sm: 0 1px 3px 0 rgba(0, 152, 163, 0.1);
-            --shadow-md: 0 4px 6px -1px rgba(0, 152, 163, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 152, 163, 0.1);
-            --shadow-accent: 0 0 0 3px rgba(255, 92, 0, 0.2);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          }
-          html {
-            scroll-behavior: smooth;
-            font-family: var(--font-base);
-          }
-        `}
-      </style>
+    <motion.div
+      className="category-page relative bg-[#0a0a0a] text-[#f8f8f8] snap-y snap-mandatory overflow-y-auto"
+      style={{
+        minHeight: '100vh',
+      }}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Global background pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] pointer-events-none z-0" />
 
-      <div className="fixed inset-0 bg-gray-100 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-gray-200" />
-      </div>
-
-      <main className="relative z-10 flex-grow flex items-center justify-center py-10">
-        <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 lg:px-16 bg-white rounded-lg shadow-lg">
-          <header className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Documents</h2>
-            <p className="text-gray-500 text-sm sm:text-base mt-2">
-              View our certifications, product brochure, technical specifications, and user manual for detailed information.
-            </p>
-          </header>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 items-start">
-            {renderPdfCard("Certifications", isLoadingCert, hasErrorCert, handleIframeLoadCert, handleIframeErrorCert, "1L45-tx2LUGnsoHAogzCzOdsAS2Gp9XfG", handleDownloadCert)}
-            {renderPdfCard("Brochure", isLoadingBrochure, hasErrorBrochure, handleIframeLoadBrochure, handleIframeErrorBrochure, "1fLgw-3noBPK-J7iPsnSxhLRR8GRvUCO0", handleDownloadBrochure)}
-            {renderPdfCard("Technical Specifications", isLoadingTechSpecs, hasErrorTechSpecs, handleIframeLoadTechSpecs, handleIframeErrorTechSpecs, "1IeM0dUr5juQBBJvQ8xIRW9Uy6vcA3og_", handleDownloadTechSpecs)}
-            {renderPdfCard("User Manual", isLoadingManual, hasErrorManual, handleIframeLoadManual, handleIframeErrorManual, "1e5nAQAJq8hRMdREET9xtQ7KAtONvdw_n", handleDownloadManual)}
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-
-  function renderPdfCard(title, isLoading, hasError, onLoad, onError, fileId, downloadHandler) {
-    const previewURL = `https://drive.google.com/file/d/${fileId}/preview`;
-    const downloadURL = `https://drive.google.com/uc?export=download&id=${fileId}`;
-
-    return (
-      <div className="flex flex-col items-center">
-        <h3 className="text-lg sm:text-xl font-semibold mb-4 border-b-2 border-orange-500">{title}</h3>
-        <div className="w-full h-[400px] sm:h-[500px] md:h-[550px] shadow-lg border border-gray-200 rounded-lg overflow-hidden relative">
-          {isLoading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-10">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
-            </div>
-          )}
-          {hasError && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-10">
-              <div className="text-center text-red-600">
-                <FaExclamationTriangle className="inline-block mb-2 text-2xl" />
-                <p className="text-sm">Failed to load {title.toLowerCase()}. Please try downloading.</p>
-              </div>
-            </div>
-          )}
-          <iframe
-            src={previewURL}
-            title={`${title} PDF`}
-            width="100%"
-            height="100%"
-            allow="autoplay"
-            className="rounded"
-            onLoad={onLoad}
-            onError={onError}
-            aria-label={`${title} PDF viewer`}
-          >
-            <p className="p-4 text-gray-600">
-              Your browser does not support iframes. Please{' '}
-              <a
-                href={downloadURL}
-                className="text-blue-600 underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                download the {title.toLowerCase()}
-              </a>{' '}
-              to view it.
-            </p>
-          </iframe>
-        </div>
-        <button
-          onClick={downloadHandler}
-          className="mt-4 flex items-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 sm:px-6 rounded-lg shadow transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          aria-label={`Download ${title} PDF`}
+      {/* Category Sections */}
+      {categories.map((category, idx) => (
+        <motion.section
+          key={category.id}
+          className={`relative w-full min-h-screen flex items-center justify-center snap-start py-12 ${
+            idx !== categories.length - 1 ? 'mb-12' : ''
+          }`}
+          style={{ backgroundColor: '#0a0a0a' }}
+          variants={childVariants}
         >
-          <FaFileDownload className="mr-2" />
-          Download {title}
-        </button>
-      </div>
-    );
-  }
+          {/* Background Image with animation */}
+          <motion.div
+            className="absolute inset-0 overflow-hidden"
+            variants={imageVariants}
+            initial="initial"
+            animate="visible"
+          >
+            <img
+              src={category.image}
+              alt={`${category.name} category background`}
+              className="w-full h-full object-cover object-center"
+              loading="lazy"
+              onError={(e) => (e.target.src = 'https://via.placeholder.com/1350x900?text=Placeholder+Image')}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/70 to-transparent" />
+          </motion.div>
+
+          {/* Foreground content */}
+          <div className="container mx-auto px-6 md:px-12 relative z-10 text-center">
+            <motion.div className="flex flex-col items-center" variants={childVariants}>
+              <motion.span
+                className="text-5xl text-[#f9943b] mb-6"
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                {category.icon}
+              </motion.span>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#f8f8f8] to-[#f9943b]">
+                {category.name}
+              </h2>
+              <p className="text-lg md:text-xl font-light text-[#f8f8f8] opacity-80 max-w-2xl mx-auto mb-8">
+                {category.description}
+              </p>
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <Link
+                  to={`/products?category=${category.slug}`}
+                  className="inline-block bg-[#f9943b] text-[#0a0a0a] py-3 px-8 rounded-full font-semibold text-base hover:bg-[#e08934] transition-colors duration-300"
+                  style={{ textDecoration: 'none' }}
+                  aria-label={`Explore products in ${category.name}`}
+                >
+                  Explore Now
+                </Link>
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.section>
+      ))}
+    </motion.div>
+  );
 };
 
-export default PdfSection;
+export default CategoryPage;
